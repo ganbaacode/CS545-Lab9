@@ -1,11 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import Form from "../../Components/ChangeNameForm/Form"
 import NewPost from "../../Components/NewPost/NewPost";
 import PostDetail from "../../Components/PostDetail/PostDetail";
 import Posts from "../Posts/Posts"
 
 
+export const MyContext = createContext(null);
 
 
 export default function Dashboard() {
@@ -20,6 +21,8 @@ export default function Dashboard() {
       { id: 2, title: "MIU", author: "Dean" },
       { id: 3, title: "Enjoy Life", author: "Jasmine" }
     ])
+
+
 
   const fetchPosts = () => {
     axios.get('http://localhost:8080/api/v1/posts')
@@ -92,12 +95,13 @@ export default function Dashboard() {
 
 
   return (
-    <div>
+    <MyContext.Provider value={{ selected }}>
       <div className="Post">
         <Posts
           data={postState}
           setSelected={setSelectedHandler}
-          deletePost={deletePost} />
+          deletePost={deletePost}
+        />
       </div>
 
       <div className="FormCn">
@@ -112,7 +116,7 @@ export default function Dashboard() {
       <div className="detailContainer">
         <PostDetail data={detail} />
       </div>
-    </div>
+    </MyContext.Provider>
   )
 
 }

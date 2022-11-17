@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 export default function NewPost(props) {
 
-    const [title, setTitle] = useState("")
-    const [author, setAuthor] = useState("")
-    const [body, setBody] = useState("")
+    // const [title, setTitle] = useState("")
+    // const [author, setAuthor] = useState("")
+    // const [body, setBody] = useState("")
+
+    const titleElement = useRef("")
+    const authorElement = useRef("")
+    const bodyElement = useRef("")
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const post = {
-            "title": title,
-            "author": author,
-            "body": body
+            "title": titleElement.current?.value,
+            "author": authorElement.current.value,
+            "body": bodyElement.current.value
         }
 
         props.addPost(post)
@@ -25,18 +29,18 @@ export default function NewPost(props) {
         <form onSubmit={handleSubmit} className="newPostForm">
             title: <input
                 type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                ref={titleElement}
+            //onChange={(e) => setTitle(e.target.value)}
             ></input>
             author: <input
                 type="text"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
+                ref={authorElement}
+            //onChange={(e) => setAuthor(e.target.value)}
             ></input>
             body: <input
                 type="text"
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
+                ref={bodyElement}
+            //onChange={(e) => setBody(e.target.value)}
             ></input>
             <br></br>
             <button type='submit'>addPost</button>

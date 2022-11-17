@@ -1,6 +1,9 @@
 import React from 'react'
 
 export default function Post(props) {
+
+
+
     return (
         <div className='Content' onClick={props.setSelected}>
             <h3>Title: {props.title}</h3>

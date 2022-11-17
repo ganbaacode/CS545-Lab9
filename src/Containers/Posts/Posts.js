@@ -1,6 +1,7 @@
 import React from 'react'
 import Post from '../../Components/Post/Post'
 
+
 export default function Posts(props) {
 
 
